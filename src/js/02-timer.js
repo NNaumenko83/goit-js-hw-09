@@ -3,6 +3,8 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 const refs = {
   datetimePicker: document.querySelector('#datetime-picker'),
   dateTime: document.querySelector('#datetime-picker'),
@@ -42,7 +44,10 @@ const options = {
 
     if (currentDate >= choosedtDate) {
       refs.startButton.disabled = true;
-      alert('Please choose a date in the future');
+      Notify.failure('Please choose a date in the future', {
+        width: '280px',
+        position: 'center-top',
+      });
       return;
     }
     refs.startButton.disabled = false;
@@ -115,41 +120,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-
-/* <input type="text" id="datetime-picker" />
-    <button type="button" data-start>Start</button>
-
-    <div class="timer">
-      <div class="field">
-        <span class="value" data-days>00</span>
-        <span class="label">Days</span>
-      </div>
-      <div class="field">
-        <span class="value" data-hours>00</span>
-        <span class="label">Hours</span>
-      </div>
-      <div class="field">
-        <span class="value" data-minutes>00</span>
-        <span class="label">Minutes</span>
-      </div>
-      <div class="field">
-        <span class="value" data-seconds>00</span>
-        <span class="label">Seconds</span>
-      </div> */
-
-// const date1 = Date.now();
-
-// console.log(date1);
-
-// // console.log(date.getTime());
-
-// setTimeout(() => {
-//   const date2 = Date.now();
-//   console.log(date1);
-//   console.log(date2);
-//   console.log(date2 - date1);
-// }, 3000);
